@@ -4,5 +4,6 @@ __pycache__/
 *.pyc
 *.pyo
 users.json
-.DS_Store
 chats.json
+analytics.json
+.DS_Store
