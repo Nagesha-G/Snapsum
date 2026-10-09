@@ -1,9 +1,9 @@
-streamlit
+
+fastapi
+uvicorn[standard]
+python-multipart
 easyocr
 openai
 pillow
 python-dotenv
 fpdf2
-streamlit-extras
-streamlit-authenticator
-PyYAML

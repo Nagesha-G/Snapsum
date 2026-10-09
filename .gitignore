@@ -1,10 +1,8 @@
-cat > .gitignore << 'EOF'
 .env
 venv/
 __pycache__/
 *.pyc
 *.pyo
+users.json
 .DS_Store
-.streamlit/secrets.toml
-auth_config.yaml
-EOF
+chats.json

@@ -1,28 +1,28 @@
 # 📸 SnapSum
 
-> AI-powered screenshot analyzer. Upload any screenshot → extract text → summarize → translate → chat with it.
+> Turn screenshots into summaries, translations, and answers.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
 ![EasyOCR](https://img.shields.io/badge/EasyOCR-OCR-green)
 ![Groq](https://img.shields.io/badge/Groq-LLM-orange)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
-![Version](https://img.shields.io/badge/version-1.0-blue)
+![Version](https://img.shields.io/badge/version-4.2-blue)
 
 ---
 
 ## 🧠 What It Does
 
-Drop in any screenshot — a chat, an article, a receipt, a roadmap — and SnapSum will:
+SnapSum is a full-stack web app that reads any screenshot and helps you understand it.
 
-1. **Extract** the text using OCR
-2. **Translate** it to your chosen language
-3. **Summarize** it into 3 concise bullet points
-4. **Explain** what, why, and how — like a tutor
-5. **Answer** your questions in a chat interface
-6. **Export** everything as TXT or PDF
+1. **Extract** — Pulls text from any screenshot using OCR
+2. **Summarize** — Delivers a clean 3-bullet summary
+3. **Translate** — Converts content into 21 languages
+4. **Explain** — Breaks down the content as WHAT / WHY / HOW
+5. **Chat** — Answers your questions about the image
+6. **Export** — Downloads chat conversations as `.txt`
 
-All wrapped in a multi-page Streamlit app with user accounts and a clean UI.
+Every answer is grounded in the uploaded image. If something isn't in the image, SnapSum says so. If it's sensitive (passwords, IDs, OTPs), SnapSum refuses to reveal it.
 
 ---
 
@@ -30,17 +30,21 @@ All wrapped in a multi-page Streamlit app with user accounts and a clean UI.
 
 | Feature | Description |
 |---------|-------------|
-| 🔐 **User accounts** | Register, login, and logout |
-| 🏠 **Home page** | Landing screen with feature overview |
-| 🌐 **21 output languages** | Hindi, Telugu, Tamil, Spanish, French, Arabic, Chinese, Japanese, and more |
-| 🔍 **OCR extraction** | Reads text from PNG/JPG/JPEG screenshots |
-| 🌐 **Translate button** | Translate the extracted text to any supported language |
-| 🤖 **AI summarization** | 3-bullet summary in your chosen language |
-| 🧠 **Explain mode** | What / Why / How breakdown of the content |
-| 💬 **Chat interface** | Multi-chat Q&A with per-chat history |
-| 📚 **Chat management** | Create new chats, switch between them |
-| ⬇️ **Export options** | Download summaries as `.txt` or `.pdf` |
-| 🎁 **Free trial** | 10 uses per session |
+| 🖼️ **Screenshot OCR** | Reads text from PNG/JPG/JPEG with real-time progress |
+| 🌐 **21 output languages** | Hindi, Telugu, Tamil, Spanish, French, Arabic, Chinese, Japanese, Korean, and more |
+| ✨ **3-bullet summaries** | Clean, consistent summaries every time |
+| 🧠 **Explain mode** | Beginner-friendly WHAT / WHY / HOW breakdown |
+| 💬 **Image-aware chat** | Ask anything — SnapSum only answers from the image |
+| 📊 **Bill calculations** | Ask "what's the total?" on a receipt — SnapSum computes it |
+| 🔒 **Privacy guard** | Refuses OTPs, bank numbers, IDs, third-party contact info |
+| 📚 **Chat persistence** | Chats saved per user — survive refresh |
+| 🔐 **Session auth** | Login is tab-scoped; closing the tab signs you out |
+| 👤 **User accounts** | Register, login, profile picture upload, delete account |
+| 📊 **Usage tracking** | 25 free requests per account, live count in navbar |
+| ⬇️ **Export chats** | Download any chat as a `.txt` file |
+| 🎨 **Modern UI** | Clean indigo-on-white design, responsive on mobile |
+| ⌨️ **Keyboard shortcut** | `Ctrl+K` focuses chat input |
+| 💛 **Support page** | UPI donations from ₹10 upward |
 
 ---
 
@@ -48,15 +52,17 @@ All wrapped in a multi-page Streamlit app with user accounts and a clean UI.
 
 ```
 [Your Screenshot]
-       ↓ (Pillow reads image)
-[Image Object]
-       ↓ (EasyOCR scans pixels)
-[Raw Text]
-       ↓ (Groq LLM: summarize / translate / explain / answer)
-[Output in chosen language]
-       ↓ (Streamlit renders)
-[Web Page in Browser]
+       ↓
+[Pillow reads image]
+       ↓
+[EasyOCR extracts text]
+       ↓
+[Groq LLM: summarize / translate / explain / answer]
+       ↓
+[Live web UI in the browser]
 ```
+
+**Architecture:** One Python file — FastAPI serves both the backend API and the HTML/CSS/JS frontend. No build step, no Node.js, no separate frontend repo.
 
 ---
 
@@ -64,12 +70,12 @@ All wrapped in a multi-page Streamlit app with user accounts and a clean UI.
 
 | Layer | Tool |
 |-------|------|
-| UI | [Streamlit](https://streamlit.io) |
-| Auth | [streamlit-authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) |
+| Backend | [FastAPI](https://fastapi.tiangolo.com) |
+| Server | [Uvicorn](https://www.uvicorn.org) |
 | OCR | [EasyOCR](https://github.com/JaidedAI/EasyOCR) |
 | LLM | [Groq](https://groq.com) — `openai/gpt-oss-120b` |
 | Image | [Pillow](https://python-pillow.org) |
-| PDF | [fpdf2](https://py-pdf.github.io/fpdf2/) |
+| Markdown rendering | [marked.js](https://marked.js.org) |
 | Config | [python-dotenv](https://github.com/theskumar/python-dotenv) |
 
 ---
@@ -94,8 +100,8 @@ venv\Scripts\activate
 **Windows (Git Bash) / macOS / Linux:**
 ```bash
 python -m venv venv
-source venv/Scripts/activate   # Windows Git Bash
-# source venv/bin/activate     # macOS / Linux
+source venv/Scripts/activate     # Windows Git Bash
+# source venv/bin/activate       # macOS / Linux
 ```
 
 ### 3. Install dependencies
@@ -113,6 +119,11 @@ Create a `.env` file in the project root:
 ```env
 GROQ_API_KEY=your_key_here
 GROQ_MODEL=openai/gpt-oss-120b
+
+# Optional — customize the support page
+SUPPORT_UPI=yourname@upi
+SUPPORT_NAME=Your Name
+SUPPORT_EMAIL=support@snapsum.app
 ```
 
 > ⚠️ **Never commit `.env`.** It's already in `.gitignore`.
@@ -120,25 +131,47 @@ GROQ_MODEL=openai/gpt-oss-120b
 ### 5. Run
 
 ```bash
-streamlit run app.py
+uvicorn app:app --reload --port 8000
 ```
 
-The app opens at **http://localhost:8501**.
+Open **http://localhost:8000**
+
+> First OCR run downloads ~100 MB of EasyOCR models — takes 30–60 seconds. Subsequent runs are instant.
 
 ---
 
 ## 🎯 Usage
 
-1. **Register** a new account from the home page
-2. **Login** with your credentials
-3. Choose an **output language** (21 options)
-4. **Upload** a screenshot
-5. Use the action buttons:
-   - 🌐 **Translate** — translate extracted text
-   - ✨ **Summarize** — 3-bullet summary + download
-   - 🧠 **Explain** — what / why / how breakdown
-6. **Chat** with the image using the chat box below
-7. **Create new chats** from the sidebar to organize different images
+1. **Register** an account from the Login page
+2. **Login** — session persists until you close the tab
+3. Choose **input language** (what you type) and **output language** (how AI responds)
+4. **Upload** a screenshot — watch the progress bar
+5. Use the **chat quick actions**:
+   - ✨ **Summarize** — 3 bullets
+   - 🌐 **Translate** — pick target language
+   - 🧠 **Explain** — WHAT / WHY / HOW
+6. **Ask anything** in the chat — answers come from the image only
+7. **Export** the chat as `.txt` from the ⬇️ button
+8. **Switch chats** with the dropdown, or start a new one with ➕
+
+---
+
+## 🚀 Version History
+
+| Version | Highlights |
+|---------|-----------|
+| **v0.1** | Working MVP — upload, OCR, summarize, Q&A |
+| **v0.2** | Sidebar, session history, download summary |
+| **v0.3** | Multi-page UI, user auth, translation, explanation |
+| **v0.4** | SQLite-ready architecture, PDF export |
+| **v1.0** | First public release — user accounts, 21 languages |
+| **v2.0** | Modular structure, top navbar, modern UI |
+| **v3.0** | Full-stack rewrite — FastAPI + HTML/CSS/JS in one file |
+| **v3.3** | Markdown rendering, chat persistence, multiple chats |
+| **v3.4** | Upload progress, support page, voice placeholder |
+| **v4.0** | Profile pictures, delete account, inline forms |
+| **v4.1** | Image-focused AI, privacy guard, usage limits |
+| **v4.2** | Session auth, ₹10 tier, copy/reset buttons, Ctrl+K |
 
 ---
 
@@ -146,13 +179,15 @@ The app opens at **http://localhost:8501**.
 
 ```
 Snapsum/
-├── app.py                  # Main Streamlit app
-├── requirements.txt        # Python dependencies
-├── auth_config.yaml        # User credentials (gitignored, auto-generated)
-├── .env                    # Your secrets (gitignored)
+├── app.py                    # Entire app — FastAPI + HTML + CSS + JS
+├── requirements.txt          # Python dependencies
+├── .env                      # Your secrets (gitignored)
 ├── .gitignore
 ├── README.md
-└── venv/                   # Virtual environment (gitignored)
+├── users.json                # User accounts (gitignored, auto-generated)
+├── chats.json                # Chat history (gitignored, auto-generated)
+├── analytics.json            # Page views (gitignored, auto-generated)
+└── venv/                     # Virtual environment (gitignored)
 ```
 
 ---
@@ -160,53 +195,105 @@ Snapsum/
 ## 🔒 Security
 
 - API keys loaded from `.env` via `python-dotenv`
-- User passwords hashed with bcrypt (via `streamlit-authenticator`)
-- `.env` and `auth_config.yaml` are both gitignored
-- No user data leaves your machine except OCR text sent to Groq's API
+- Passwords hashed with SHA-256
+- `.env`, `users.json`, `chats.json`, `analytics.json` are all gitignored
+- **Session tokens** stored in `sessionStorage` — cleared when tab closes
+- **Privacy guard** in the AI prompt refuses to reveal OTPs, bank numbers, IDs, third-party contact info
+- Answers are strictly scoped to the uploaded image
+
+---
+
+## 🔐 How Session Auth Works
+
+SnapSum uses **`sessionStorage`** instead of `localStorage`:
+
+| Storage | Cleared when |
+|---------|-------------|
+| `localStorage` | User manually clears, or never |
+| `sessionStorage` | **Tab closes** ✅ |
+
+Closing the browser tab signs you out automatically. Reopening → fresh session → Home page.
+
+---
+
+## 🤖 AI Behavior
+
+SnapSum's system prompt enforces these rules:
+
+1. **Read carefully** — the answer is almost always in the image
+2. **Calculate** — bills, sums, counts, differences computed from image data
+3. **Translate naturally** — you can ask in one language, get answers in another
+4. **Extract structured data** — tables, receipts, forms rendered as bullets
+5. **Refuse privacy violations** — OTPs, PINs, IDs never revealed
+6. **Say "not in image"** — no guessing, no fabrication
+7. **Stay in scope** — redirect unrelated questions politely
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] **v0.1** — Working MVP (upload, OCR, summarize, Q&A)
-- [x] **v0.2** — Sidebar, session history, download, two-column layout
-- [x] **v0.3** — Multi-page UI, user auth, translation, explanation, chat
-- [x] **v1.0** — Official release: user accounts, 21 languages, translate, explain, chat, PDF export
-- [ ] **v1.1** — SQLite persistence (chats + usage counters survive refresh)
-- [ ] **v1.2** — Batch upload (multiple images)
-- [ ] **v1.3** — Streaming responses (word-by-word display)
-- [ ] **v1.4** — Settings panel (model picker, temperature)
-- [ ] **v2.0** — Deployment to Streamlit Cloud + public demo
+- [x] **v1.0** — First release
+- [x] **v2.0** — Modern UI
+- [x] **v3.0** — Full-stack rewrite
+- [x] **v4.0** — Profile management
+- [x] **v4.1** — Image-focused AI + privacy guard
+- [x] **v4.2** — Session auth + polish
+- [ ] **v4.3** — Voice assistant (Whisper + TTS)
+- [ ] **v4.4** — SQLite database
+- [ ] **v4.5** — Multi-image batch processing
+- [ ] **v5.0** — Public SaaS launch
 
 ---
 
 ## ⚠️ Known Limitations
 
-- Usage counter resets on page refresh (SQLite coming in v1.1)
-- Chat history is session-only (SQLite coming in v1.1)
-- OCR runs in English only (translation handles output language)
-- User store is a YAML file — fine for demo, not production scale
+- OCR is English-only (translation handles output language)
+- Usage counter is per account, not per day
+- Free tier: 25 requests per account
+- No email verification (open registration)
+- Analytics stores page views only — no tracking
 
 ---
 
-## 🤝 Contributing
+## 🐛 Report Issues
 
-Pull requests are welcome. For major changes, open an issue first to discuss what you'd like to change.
+Found a bug or have a feature request? Open an issue at:
+**https://github.com/Nagesha-G/Snapsum/issues**
+
+Or email: **support@snapsum.app**
+
+---
+
+## 💛 Support
+
+SnapSum is free to use. If it saves you time, a small contribution helps keep the servers running.
+
+- **UPI ID:** `nagesha@upi`
+- **Amount:** ₹10 or more, whatever feels right
+
+Or simply:
+- ⭐ Star the repo
+- 🐦 Share on social media
+- 📧 Send feedback
 
 ---
 
 ## 📄 License
 
-MIT — free to use, modify, and share. See [LICENSE](LICENSE) if present.
+MIT — free to use, modify, and share.
 
 ---
 
 ## 🙌 Credits
 
-Built with [Streamlit](https://streamlit.io), [EasyOCR](https://github.com/JaidedAI/EasyOCR), [Groq](https://groq.com), and [streamlit-authenticator](https://github.com/mkhorasani/Streamlit-Authenticator).
+Built with [FastAPI](https://fastapi.tiangolo.com), [EasyOCR](https://github.com/JaidedAI/EasyOCR), [Groq](https://groq.com), and [marked.js](https://marked.js.org).
+
+Developed by **Nagesha G**
 
 ---
 
-## ⭐ Support
+<div align="center">
 
-If this project helped you, give it a star on GitHub — it helps others find it.
+**If SnapSum helped you, give it a ⭐ on GitHub.**
+
+</div>
