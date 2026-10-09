@@ -269,7 +269,7 @@ SnapSum's system prompt enforces these rules:
 Found a bug or have a feature request? Open an issue at:
 **https://github.com/Nagesha-G/Snapsum/issues**
 
-Or email: **support@snapsum.app**
+Or email: **iamnagesha3871@gmail.com**
 
 ---
 
@@ -277,8 +277,8 @@ Or email: **support@snapsum.app**
 
 SnapSum is free to use. If it saves you time, a small contribution helps keep the servers running.
 
-- **UPI ID:** `nagesha@upi`
-- **Amount:** ₹10 or more, whatever feels right
+- **UPI ID:** `n4ge5h4@okaxis`
+- **Amount:** ₹1 or more, whatever feels right
 
 Or simply:
 - ⭐ Star the repo
