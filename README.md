@@ -1,13 +1,3 @@
----
-title: SnapSum
-emoji: 📸
-colorFrom: indigo
-colorTo: purple
-sdk: docker
-pinned: false
-app_port: 7860
----
-# 📸 SnapSum
 
 > Turn screenshots into summaries, translations, and answers.
 
